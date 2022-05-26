@@ -28,8 +28,6 @@ bool CPlayer::Load(void) {
 	{
 		return false;
 	}
-<<<<<<< HEAD
-=======
 
 	if (!m_ShotMesh.Load("pshot.mom"))
 	{
@@ -39,18 +37,12 @@ bool CPlayer::Load(void) {
 	{
 		m_ShotArray[i].SetMesh(&m_ShotMesh);
 	}
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 	return true;
 }
 
 /**
  * 初期化
  */
-<<<<<<< HEAD
-void CPlayer::Initialize(void){
-	m_Pos = Vector3(0.0f, 0.0f, -FIELD_HALF_Z + 2.0f);
-	m_RotZ = 0;
-=======
 void CPlayer::Initialize(void) {
 	m_Pos = Vector3(0.0f, 0.0f, -FIELD_HALF_Z + 2.0f);
 	m_RotZ = 0;
@@ -61,17 +53,11 @@ void CPlayer::Initialize(void) {
 	}
 
 
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 }
 
 /**
  * 更新
  */
-<<<<<<< HEAD
-void CPlayer::Update(void){
-	float Roll = 0;
-
-=======
 void CPlayer::Update(void) {
 	float Roll = 0;
 	m_Spd = PLAYER_SPEED;
@@ -88,35 +74,17 @@ void CPlayer::Update(void) {
 		m_Pos.x = min(m_Pos.x + PLAYER_SPEED, FIELD_HALF_X);
 	}
 	//キー移動
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 	if (g_pInput->IsKeyHold(MOFKEY_LEFT))
 	{
 		m_Pos.x = max(m_Pos.x - PLAYER_SPEED, -FIELD_HALF_X);
 		Roll -= MOF_MATH_PI;
-<<<<<<< HEAD
-	}
-=======
 
 	}
 
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 	if (g_pInput->IsKeyHold(MOFKEY_RIGHT))
 	{
 		m_Pos.x = min(m_Pos.x + PLAYER_SPEED, FIELD_HALF_X);
 		Roll += MOF_MATH_PI;
-<<<<<<< HEAD
-	}
-	if (g_pInput->IsKeyHold(MOFKEY_UP))
-	{
-		m_Pos.z = min(m_Pos.z + PLAYER_SPEED, FIELD_HALF_Z);
-	}
-	if (g_pInput->IsKeyHold(MOFKEY_UP))
-	{
-		m_Pos.z = max(m_Pos.z - PLAYER_SPEED, -FIELD_HALF_Z);
-	}
-	float RotSpeed = MOF_ToRadian(10);
-	if (Roll == 0);
-=======
 
 	}
 
@@ -135,7 +103,6 @@ void CPlayer::Update(void) {
 	//回転
 	float RotSpeed = MOF_ToRadian(10);
 	if (Roll == 0)
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 	{
 		RotSpeed = min(abs(m_RotZ) * 0.1f, RotSpeed);
 	}
@@ -145,8 +112,6 @@ void CPlayer::Update(void) {
 	}
 	m_RotZ -= copysignf(min(RotSpeed, abs(m_RotZ)), m_RotZ);
 
-<<<<<<< HEAD
-=======
 	if (m_ShotWait <= 0)
 	{
 		if (g_pInput->IsKeyHold(MOFKEY_SPACE))
@@ -176,20 +141,12 @@ void CPlayer::Update(void) {
 		m_ShotArray[i].Update();
 	}
 
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 }
 
 
 /**
  * 描画
  */
-<<<<<<< HEAD
-void CPlayer::Render(void){
-	CMatrix44 matWorld;
-	matWorld.RotationZ(m_RotZ);
-	matWorld.SetTranslation(m_Pos);
-	m_Mesh.Render(matWorld);
-=======
 void CPlayer::Render(void) {
 	//ワールド行列作成
 	CMatrix44 matworld;
@@ -202,7 +159,6 @@ void CPlayer::Render(void) {
 		m_ShotArray[i].Render();
 	}
 
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 }
 
 /**
@@ -217,12 +173,7 @@ void CPlayer::RenderDebugText(void) {
 /**
  * 解放
  */
-<<<<<<< HEAD
-void CPlayer::Release(void){
-	m_Mesh.Release();
-=======
 void CPlayer::Release(void) {
 	m_Mesh.Release();
 	m_ShotMesh.Release();
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 }

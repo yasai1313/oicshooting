@@ -21,15 +21,12 @@ CStage::~CStage(){
  *
  */
 bool CStage::Load(){
-<<<<<<< HEAD
-=======
 	//”wŒi
 	if (!m_BG.CreateSprite("road.png"))
 	{
 		return false;
 	}
 
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 	return true;
 }
 
@@ -38,14 +35,11 @@ bool CStage::Load(){
  *
  */
 void CStage::Initialize(){
-<<<<<<< HEAD
-=======
 	m_BG.m_Angle.x  = MOF_MATH_HALFPI;
 	m_BG.m_Angle.y = MOF_MATH_HALFPI;
 	m_BG.m_Scale = Vector3(200, 200, 200);
 	m_BG.m_Position.y = -15;
 	m_BG.SetImageRect(0, 0, m_BG.GetTexture()->GetWidth() * 4, m_BG.GetTexture()->GetHeight() * 4);
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 }
 
 /**
@@ -53,10 +47,7 @@ void CStage::Initialize(){
  *
  */
 void CStage::Update(){
-<<<<<<< HEAD
-=======
 	m_Scroll += SCROLL_SPEED;
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 }
 
 /**
@@ -64,8 +55,6 @@ void CStage::Update(){
  *
  */
 void CStage::Render(){
-<<<<<<< HEAD
-=======
 	for (int i = 0; i < 2; i++)
 	{
 		m_BG.m_Position.z = 50.0f + fmodf(-m_Scroll, m_BG.m_Scale.z) + i * m_BG.m_Scale.z;
@@ -73,7 +62,6 @@ void CStage::Render(){
 		m_BG.Render();
 
 	}
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 }
 
 /**
@@ -91,8 +79,5 @@ void CStage::RenderDebugText(){
  *
  */
 void CStage::Release(){
-<<<<<<< HEAD
-=======
 	m_BG.Release();
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 }

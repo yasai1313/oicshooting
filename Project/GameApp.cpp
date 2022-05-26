@@ -10,13 +10,6 @@
 //INCLUDE
 #include	"GameApp.h"
 #include "Player.h"
-<<<<<<< HEAD
-
-//カメラ
-CCamera gCamera;
-CDirectionalLight gLight;
-CPlayer gPlayer;
-=======
 #include "Stage.h"
 
 CCamera gCamera;
@@ -27,7 +20,6 @@ CPlayer gPlayer;
 
 CStage gStage;
 
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 bool gbDebug = false;
 /*************************************************************************//*!
 		@brief			アプリケーションの初期化
@@ -39,16 +31,6 @@ bool gbDebug = false;
 MofBool CGameApp::Initialize(void) {
 	//リソース配置ディレクトリの設定
 	CUtilities::SetCurrentDirectory("Resource");
-<<<<<<< HEAD
-	gCamera.SetViewPort();
-	gCamera.LookAt(Vector3(0, 6.0f, -17.0f), Vector3(0, 0, -10), Vector3(0, 1, 0));
-	gCamera.PerspectiveFov(MOF_ToRadian(60.0f), 1024.0f / 768.0f, 0.01f, 1000.0f);
-	CGraphicsUtilities::SetCamera(&gCamera);
-
-	gLight.SetDirection(Vector3(-1, -2, 1.5f));
-	gLight.SetDiffuse(MOF_COLOR_WHITE);
-	gLight.SetAmbient(MOF_COLOR_WHITE);
-=======
 
 
 
@@ -63,23 +45,17 @@ MofBool CGameApp::Initialize(void) {
 	gLight.SetDirection(Vector3(-1, -2, 1.5f));
 	gLight.SetDiffuse(MOF_COLOR_RED);
 	gLight.SetAmbient(MOF_COLOR_HBLACK);
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 	gLight.SetSpeculer(MOF_COLOR_WHITE);
 	CGraphicsUtilities::SetDirectionalLight(&gLight);
 
 	gPlayer.Load();
 
-<<<<<<< HEAD
-	gPlayer.Initialize();
-	
-=======
 	gStage.Load();
 
 	gPlayer.Initialize();
 
 	gStage.Initialize();
 
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 	return TRUE;
 }
 /*************************************************************************//*!
@@ -159,13 +135,8 @@ MofBool CGameApp::Render(void) {
 		@return			TRUE		成功<br>
 						それ以外	失敗、エラーコードが戻り値となる
 *//**************************************************************************/
-<<<<<<< HEAD
-MofBool CGameApp::Release(void){
-	gPlayer.Release();
-=======
 MofBool CGameApp::Release(void) {
 	gPlayer.Release();
 	gStage.Release();
->>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
 	return TRUE;
 }
