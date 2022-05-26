@@ -97,6 +97,10 @@
   <ItemGroup>
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Player.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="PlayerShot.cpp" />
+>>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -104,6 +108,10 @@
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="Player.h" />
+<<<<<<< HEAD
+=======
+    <ClInclude Include="PlayerShot.h" />
+>>>>>>> 9426745917d87e031c47c8d3f100abab6a6c3f0c
     <ClInclude Include="Stage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
