@@ -6,7 +6,10 @@
 CPlayerShot::CPlayerShot() :
 m_pMesh(NULL),
 m_Pos(0.0f,0.0f,0.0f),
-m_bShow(false){
+m_Speed(0.0f, 0.0f, 0.0f),
+m_bShow(false),
+m_Mode()
+{
 }
 
 /**
@@ -19,42 +22,65 @@ CPlayerShot::~CPlayerShot(){
  * èâä˙âª
  */
 void CPlayerShot::Initialize(void){
-	m_Pos = Vector3(0.0f, 0.0f, 0.0f);
+	m_Pos = Vector3(0, 0, 0);
 	m_bShow = false;
 }
 
 /**
  * î≠éÀ
  */
-void CPlayerShot::Fire(const Vector3& p){
+void CPlayerShot::Fire(const Vector3& p, const Vector3& s, PlayerShotMode m){
 	m_Pos = p;
-	m_bShow = false;
+	m_Speed = s;
+	m_Mode = m;
+	m_bShow = true;
 }
 
 /**
  * çXêV
  */
-void CPlayerShot::Update(void){
-	if (!m_bShow)
-	{
-		return;
+void CPlayerShot::Update(){
+	if (m_bShow) {
+		
+		UpdateMode();
+		m_Pos += m_Speed;
+		if (FIELD_HALF_Z < m_Pos.z) {
+			m_bShow = false;
+		}
 	}
-	m_Pos.z += PLAYERSHOT_SPEED;
-	if (FIELD_HALF_Z < m_Pos.z)
+}
+
+void CPlayerShot::UpdateMode(){	
+	switch (m_Mode)
 	{
-		m_bShow = false;
+	case MODE_SINGLE:
+		UpdateSingleMode();
+		break;
+	case MODE_DOUBLE:
+		UpdateDoubleMode();
+		break;
+	case MODE_TRIPPLE:
+		UpdateTrippleMode();
+		break;
 	}
+}
+
+void CPlayerShot::UpdateSingleMode() {
+}
+
+void CPlayerShot::UpdateDoubleMode() {
+}
+
+void CPlayerShot::UpdateTrippleMode() {
 }
 
 /**
  * ï`âÊ
  */
 void CPlayerShot::Render(void){
-	if (!m_bShow)
-	{
-		return;
+	if (m_bShow) {
+		CMatrix44 wmat;
+		wmat.Translation(m_Pos);
+		m_pMesh->Render(wmat);
 	}
-	CMatrix44 wMat;
-	wMat.Translation(m_Pos);
-	m_pMesh->Render(wMat);
 }
