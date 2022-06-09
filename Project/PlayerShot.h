@@ -13,6 +13,9 @@ private:
 public:
 	CPlayerShot();
 	~CPlayerShot();
+	void RenderDebug();
+	CSphere GetSphere() { return CSphere(m_Pos, 0.2f); }
+	void SetShow(bool bs) { m_bShow = bs; }
 	void Initialize();
 	void Fire(const Vector3& p, const Vector3& s, PlayerShotMode m);
 	void Update();

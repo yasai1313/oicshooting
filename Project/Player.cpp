@@ -10,6 +10,7 @@ m_RotZ(0.0f),
 m_SMesh(),
 m_SArray(),
 m_SWait(),
+m_bDead(false),
 m_SMode(),
 m_SubMode()
 {
@@ -43,9 +44,10 @@ void CPlayer::Initialize(void){
 	m_RotZ = 0;
 	m_SMode = PlayerShotMode::MODE_DOUBLE;
 	m_SubMode = PlayerShotSubMode::MODE_DIRECT;
-
+	m_bDead = false;
 	for (int i = 0; i < PLAYERSHOT_COUNT; i++) {
 		m_SArray[i].Initialize();
+
 	}
 }
 
@@ -60,6 +62,10 @@ void CPlayer::Update(void){
 	float PlayerSpeed = PLAYER_SPEED;
 	float RotSpeed = MOF_ToRadian(10);
 
+	if (m_bDead)
+	{
+		return;
+	}
 	if (g_pInput->IsKeyHold(MOFKEY_LSHIFT) && SkillTimer > 4 ) {
 		PlayerSpeed *= 4;
 		RotSpeed *= 4;
@@ -199,6 +205,10 @@ void CPlayer::UpdateTrippleMode() {
  * •`‰æ
  */
 void CPlayer::Render(void){
+	if (m_bDead)
+	{
+		return;
+	}
 	CMatrix44 matWorld;
 	matWorld.RotationZ(m_RotZ);
 	matWorld.SetTranslation(m_Pos);
@@ -211,6 +221,7 @@ void CPlayer::Render(void){
 	for (int i = 0; i < PLAYERSHOT_COUNT; i++) {
 		m_SArray[i].Render();
 	}
+
 }
 
 /**
@@ -224,6 +235,45 @@ void CPlayer::RenderDebugText(void){
 	
 }
 
+/*
+*
+*/
+void CPlayer::RenderDebug(void) {
+	//“–‚½‚è”»’è‚Ì•\Ž¦
+	CGraphicsUtilities::RenderSphere(GetSphere(), Vector4(0, 1, 0, 0.3f));
+	//‹Ê‚Ì•`‰æ
+	for (int i = 0; i < PLAYERSHOT_COUNT; i++)
+	{
+		m_SArray[i].RenderDebug();
+	}
+}
+
+void CPlayer::CollisionEnemy(CEnemy& ene) {
+	if(!ene.GetShow())
+	{
+		return;
+	}
+	CSphere ps = GetSphere();
+	CSphere es = ene.GetSphere();
+	if (ps.CollisionSphere(es))
+	{
+		m_bDead = true;
+	}
+	for (int i = 0; i < PLAYERSHOT_COUNT; i++)
+	{
+		if (!m_SArray[i].GetShow())
+		{
+			continue;
+		}
+		CSphere ss = m_SArray[i].GetSphere();
+		if (ss.CollisionSphere(es))
+		{
+			ene.Damage(1);
+			m_SArray[i].SetShow(false);
+			break;
+		}
+	}
+}
 /**
  * ‰ð•ú
  */
